@@ -1,0 +1,47 @@
+[
+  {
+    "id": "hero",
+    "headline": "Sell Faster. Show More.",
+    "subcopy": "Aerials that make listings pop.",
+    "poster": "https://cdn.drone-depot.ai/hero-poster.jpg",
+    "sources": [
+      {"src": "https://cdn.drone-depot.ai/hero.mp4", "type": "video/mp4"},
+      {"src": "https://cdn.drone-depot.ai/hero.webm", "type": "video/webm"}
+    ],
+    "cta": {"label": "Request a Job", "href": "/request"}
+  },
+  {
+    "id": "real-estate",
+    "headline": "Real Estate Elevated",
+    "subcopy": "Capture stunning aerial views that showcase properties in their best light.",
+    "poster": "https://cdn.drone-depot.ai/real-estate-poster.jpg",
+    "sources": [
+      {"src": "https://cdn.drone-depot.ai/real-estate.mp4", "type": "video/mp4"},
+      {"src": "https://cdn.drone-depot.ai/real-estate.webm", "type": "video/webm"}
+    ],
+    "cta": {"label": "View Portfolio", "href": "/portfolio/real-estate"}
+  },
+  {
+    "id": "construction",
+    "headline": "Construction Progress",
+    "subcopy": "Track project milestones with professional aerial documentation.",
+    "poster": "https://cdn.drone-depot.ai/construction-poster.jpg",
+    "sources": [
+      {"src": "https://cdn.drone-depot.ai/construction.mp4", "type": "video/mp4"},
+      {"src": "https://cdn.drone-depot.ai/construction.webm", "type": "video/webm"}
+    ],
+    "cta": {"label": "Learn More", "href": "/services/construction"}
+  },
+  {
+    "id": "events",
+    "headline": "Event Coverage",
+    "subcopy": "Capture the energy and scale of your events from above.",
+    "poster": "https://cdn.drone-depot.ai/events-poster.jpg",
+    "sources": [
+      {"src": "https://cdn.drone-depot.ai/events.mp4", "type": "video/mp4"},
+      {"src": "https://cdn.drone-depot.ai/events.webm", "type": "video/webm"}
+    ],
+    "cta": {"label": "Book Now", "href": "/services/events"}
+  }
+]
+

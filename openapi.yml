@@ -1,0 +1,276 @@
+openapi: 3.0.0
+info:
+  title: DroneDepot Public API v1
+  description: Public API for DroneDepot front-end
+  version: 1.0.0
+  contact:
+    name: DroneDepot Support
+    email: ops@drone-depot.ai
+
+servers:
+  - url: http://localhost:3001
+    description: Development server
+  - url: https://api.drone-depot.ai
+    description: Production server
+
+paths:
+  /v1/public/health:
+    get:
+      summary: Health check endpoint
+      description: Returns the health status of the API
+      tags:
+        - Health
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "ok"
+                  time:
+                    type: string
+                    format: date-time
+                    example: "2024-01-15T10:30:00.000Z"
+
+  /v1/public/plans:
+    get:
+      summary: Get subscription plans
+      description: Returns an array of subscription plans and credit details
+      tags:
+        - Plans
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Plan'
+
+  /v1/public/sections:
+    get:
+      summary: Get video sections
+      description: Returns the video reel configuration for the homepage
+      tags:
+        - Sections
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Section'
+
+  /v1/public/job-request:
+    post:
+      summary: Submit a job request
+      description: Submit a new job request for aerial photography services
+      tags:
+        - Job Requests
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JobRequest'
+      responses:
+        '200':
+          description: Job request submitted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                    example: true
+                  jobNumber:
+                    type: string
+                    example: "DD-250808-0123"
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Validation failed"
+                  details:
+                    type: array
+                    items:
+                      type: object
+        '429':
+          description: Too many requests
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Too many job requests. Please try again later."
+
+components:
+  schemas:
+    Plan:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "starter"
+        name:
+          type: string
+          example: "Starter"
+        priceMonthly:
+          type: number
+          example: 199
+        creditsPerMonth:
+          type: number
+          example: 1
+        rollover:
+          type: boolean
+          example: true
+        features:
+          type: array
+          items:
+            type: string
+          example: ["FAA-certified pilots", "48-hour delivery", "Priority scheduling"]
+        notes:
+          type: string
+          example: "1 credit ≈ photo-only standard shoot"
+
+    Section:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "hero"
+        headline:
+          type: string
+          example: "Sell Faster. Show More."
+        subcopy:
+          type: string
+          example: "Aerials that make listings pop."
+        poster:
+          type: string
+          format: uri
+          example: "https://cdn.drone-depot.ai/hero-poster.jpg"
+        sources:
+          type: array
+          items:
+            type: object
+            properties:
+              src:
+                type: string
+                format: uri
+              type:
+                type: string
+          example:
+            - src: "https://cdn.drone-depot.ai/hero.mp4"
+              type: "video/mp4"
+            - src: "https://cdn.drone-depot.ai/hero.webm"
+              type: "video/webm"
+        cta:
+          type: object
+          properties:
+            label:
+              type: string
+              example: "Request a Job"
+            href:
+              type: string
+              example: "/request"
+
+    JobRequest:
+      type: object
+      required:
+        - fullName
+        - email
+        - industry
+        - location
+        - agreeToTerms
+      properties:
+        fullName:
+          type: string
+          minLength: 1
+          maxLength: 100
+          example: "John Doe"
+        email:
+          type: string
+          format: email
+          example: "john@example.com"
+        phone:
+          type: string
+          example: "+1-555-123-4567"
+        company:
+          type: string
+          example: "Acme Real Estate"
+        industry:
+          type: string
+          enum: [real_estate, construction, events, marketing, other]
+          example: "real_estate"
+        location:
+          type: object
+          required:
+            - addressLine1
+            - city
+            - state
+            - postalCode
+          properties:
+            addressLine1:
+              type: string
+              example: "123 Main St"
+            city:
+              type: string
+              example: "Austin"
+            state:
+              type: string
+              example: "TX"
+            postalCode:
+              type: string
+              example: "78701"
+            lat:
+              type: number
+              example: 30.2672
+            lng:
+              type: number
+              example: -97.7431
+        dateWindow:
+          type: object
+          properties:
+            start:
+              type: string
+              format: date
+              example: "2024-02-01"
+            end:
+              type: string
+              format: date
+              example: "2024-02-15"
+        budgetBand:
+          type: string
+          enum: [under_500, 500_1000, 1000_2500, 2500_plus]
+          example: "1000_2500"
+        mustHaveShots:
+          type: string
+          example: "Aerial view of the entire property"
+        referral:
+          type: string
+          example: "Google Search"
+        agreeToTerms:
+          type: boolean
+          example: true
+        captchaToken:
+          type: string
+          example: "hcaptcha_token_here"
+        _website:
+          type: string
+          description: Honeypot field - should be empty
+

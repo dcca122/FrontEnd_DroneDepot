@@ -1,0 +1,20 @@
+name: Block Large Files
+on: [pull_request]
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - name: Fail PR if any file > 5MB
+        run: |
+          threshold=$((5*1024*1024))
+          for f in $(git ls-files); do
+            [ -f "$f" ] || continue
+            s=$(wc -c <"$f")
+            if [ "$s" -gt "$threshold" ]; then
+              echo "::error file=$f::File exceeds 5MB. Use CDN/Stream."
+              exit 1
+            fi
+          done
+

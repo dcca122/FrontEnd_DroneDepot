@@ -1,0 +1,74 @@
+{
+  "info": {
+    "name": "DroneDepot Public API v1",
+    "description": "Public API collection for DroneDepot front-end",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/v1/public/health",
+          "host": ["{{baseUrl}}"],
+          "path": ["v1", "public", "health"]
+        }
+      }
+    },
+    {
+      "name": "Get Plans",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/v1/public/plans",
+          "host": ["{{baseUrl}}"],
+          "path": ["v1", "public", "plans"]
+        }
+      }
+    },
+    {
+      "name": "Get Sections",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/v1/public/sections",
+          "host": ["{{baseUrl}}"],
+          "path": ["v1", "public", "sections"]
+        }
+      }
+    },
+    {
+      "name": "Submit Job Request",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"fullName\": \"John Doe\",\n  \"email\": \"john@example.com\",\n  \"phone\": \"+1-555-123-4567\",\n  \"company\": \"Acme Real Estate\",\n  \"industry\": \"real_estate\",\n  \"location\": {\n    \"addressLine1\": \"123 Main St\",\n    \"city\": \"Austin\",\n    \"state\": \"TX\",\n    \"postalCode\": \"78701\",\n    \"lat\": 30.2672,\n    \"lng\": -97.7431\n  },\n  \"dateWindow\": {\n    \"start\": \"2024-02-01\",\n    \"end\": \"2024-02-15\"\n  },\n  \"budgetBand\": \"1000_2500\",\n  \"mustHaveShots\": \"Aerial view of the entire property\",\n  \"referral\": \"Google Search\",\n  \"agreeToTerms\": true\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/v1/public/job-request",
+          "host": ["{{baseUrl}}"],
+          "path": ["v1", "public", "job-request"]
+        }
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3001",
+      "type": "string"
+    }
+  ]
+}
+

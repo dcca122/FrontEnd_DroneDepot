@@ -283,3 +283,31 @@ CMD ["npm", "start"]
 ## License
 
 MIT License - see LICENSE file for details.
+
+## Frontend
+
+### Development
+
+```bash
+cd apps/frontend
+npm i
+npm run dev
+```
+
+The frontend runs on [http://localhost:3000](http://localhost:3000) by default.
+Set the backend API base URL via environment variable in `.env.local`:
+
+```
+NEXT_PUBLIC_API_BASE_URL=http://localhost:3001
+```
+
+### Asset Placement
+
+Drop assets manually after merge:
+
+- `/public/video/hero.mp4` – H.264/MP4 1080p or 4K, 15–24 fps, ~10–20s loop, muted.
+- `/public/images/logo.png`
+- `/public/images/reel-cover-1.jpg`
+- `/public/icons/pilot.svg`, `pricing.svg`, `coverage.svg`, `clock.svg`
+
+Until assets are added, gradient fallbacks render.

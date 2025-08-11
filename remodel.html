@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Residential Remodel Compliance | Drone Depot</title>
+  <meta name="description" content="Photo, video and annotated report packages for remodel compliance." />
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/pages.css">
+</head>
+<body>
+<header>
+  <nav class="navbar container">
+    <a href="/" class="logo">Drone Depot</a>
+    <button class="navbar-toggle" aria-label="Toggle navigation">☰</button>
+    <ul id="nav-menu">
+      <li><a href="/services.html">Services</a></li>
+      <li><a href="/remodel.html">Remodel</a></li>
+      <li><a href="/municipal.html">Municipal</a></li>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/faq.html">FAQ</a></li>
+      <li><a href="/resources.html">Resources</a></li>
+      <li><a href="/contact.html">Contact</a></li>
+      <li><a class="btn" href="/index.html#lead-intake">Get Matched</a></li>
+    </ul>
+  </nav>
+</header>
+<main>
+  <section class="hero" style="background:#333">
+    <div class="content">
+      <h1>Remodel Documentation—Handled.</h1>
+    </div>
+  </section>
+  <section class="section container">
+    <h2>Packages</h2>
+    <div class="grid grid-3">
+      <div class="card"><h3>Starter</h3><p>Photo Proof. From $199.</p></div>
+      <div class="card"><h3>Standard</h3><p>Photo + Video. From $349.</p></div>
+      <div class="card"><h3>Pro</h3><p>Annotated Report. From $499.</p></div>
+    </div>
+    <p><a href="/assets/sample-report.pdf" download>Download Sample Report</a></p>
+  </section>
+  <section class="section container">
+    <h2>Workflow</h2>
+    <ol>
+      <li>Intake</li>
+      <li>Schedule</li>
+      <li>Fly</li>
+      <li>Report in 48h</li>
+    </ol>
+  </section>
+  <section class="section container">
+    <h2>FAQ</h2>
+    <details><summary>Is my data private?</summary><p>Yes. We keep data secure.</p></details>
+    <details><summary>Do I need to notify neighbors?</summary><p>We recommend it.</p></details>
+    <details><summary>What about weather?</summary><p>We reschedule if needed.</p></details>
+    <details><summary>What formats?</summary><p>JPEG, MP4, PDF.</p></details>
+    <details><summary>City submittals?</summary><p>Reports map to city checklists.</p></details>
+  </section>
+  <section class="section container">
+    <h2>Start Remodel Package</h2>
+    <form id="remodel-form">
+      <div class="form-group"><input type="text" name="name" placeholder="Name" required></div>
+      <div class="form-group"><input type="email" name="email" placeholder="Email" required></div>
+      <div class="form-group"><input type="tel" name="phone" placeholder="Phone" required></div>
+      <div class="form-group"><input type="text" name="address" placeholder="Address" required></div>
+      <div class="form-group"><input type="text" name="city" placeholder="City/Jurisdiction" required></div>
+      <div class="form-group"><input type="text" name="permit" placeholder="Permit #"></div>
+      <div class="form-group"><select name="hoa" required><option value="">HOA?</option><option>Yes</option><option>No</option></select></div>
+      <div class="form-group"><input type="text" name="dates" placeholder="Target inspection dates"></div>
+      <div class="form-group"><textarea name="notes" placeholder="Notes"></textarea></div>
+      <div class="form-group"><input type="file" name="permitFile" accept="application/pdf"></div>
+      <button class="btn" type="submit">Submit</button>
+      <div class="alert" role="status"></div>
+    </form>
+  </section>
+</main>
+<footer>
+  <div class="container">
+    <p>&copy; <span id="current-year"></span> Drone Depot</p>
+  </div>
+</footer>
+<script src="/js/main.js" defer></script>
+</body>
+</html>

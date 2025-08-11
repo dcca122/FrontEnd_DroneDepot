@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Drone Depot | Hire Vetted Drone Pros</title>
+  <meta name="description" content="On-demand aerial photos, video & data with Residential Remodel Compliance packages.">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/pages.css">
+</head>
+<body>
+  <header>
+    <nav class="navbar container">
+      <a href="/" class="logo">Drone Depot</a>
+      <button class="navbar-toggle" aria-label="Toggle navigation">☰</button>
+      <ul id="nav-menu">
+        <li><a href="/services.html">Services</a></li>
+        <li><a href="/remodel.html">Remodel</a></li>
+        <li><a href="/municipal.html">Municipal</a></li>
+        <li><a href="/about.html">About</a></li>
+        <li><a href="/faq.html">FAQ</a></li>
+        <li><a href="/resources.html">Resources</a></li>
+        <li><a href="/contact.html">Contact</a></li>
+        <li><a class="btn" href="#lead-intake">Get Matched</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <video autoplay muted loop playsinline poster="/assets/hero-poster.jpg" id="hero-video">
+        <source src="/assets/hero.mp4" type="video/mp4">
+        <source src="/assets/hero.webm" type="video/webm">
+      </video>
+      <div class="content">
+        <h1>Hire Vetted Drone Pros—Fast, Safe, Hassle-Free.</h1>
+        <p>On-demand aerial photos, video & data. Now with Residential Remodel Compliance packages.</p>
+        <a class="btn" href="#lead-intake">Get Matched</a>
+        <a class="btn btn-secondary" href="/resources.html#guide">Smart Buyer’s Guide</a>
+      </div>
+    </section>
+
+    <section class="trust-bar">
+      <span>FAA Licensed</span>
+      <span>Insured</span>
+      <span>Transparent Pricing</span>
+      <span>24–48h Turnaround</span>
+    </section>
+
+    <section class="section container" id="how">
+      <h2>How It Works</h2>
+      <div class="grid grid-4">
+        <div>Intake</div>
+        <div>Instant Match</div>
+        <div>Fly</div>
+        <div>Deliver</div>
+      </div>
+    </section>
+
+    <section class="section container" id="industries">
+      <h2>Industries</h2>
+      <div class="grid grid-3">
+        <a href="/services.html#real-estate" class="card">Real Estate</a>
+        <a href="/services.html#construction" class="card">Construction</a>
+        <a href="/remodel.html" class="card">Residential Remodel Compliance</a>
+        <span class="card">Events</span>
+        <span class="card">Agriculture (coming)</span>
+        <span class="card">Insurance (coming)</span>
+      </div>
+    </section>
+
+    <section class="section container" id="featured">
+      <h2>Featured Wins</h2>
+      <div class="grid grid-3">
+        <div class="card">Case 1</div>
+        <div class="card">Case 2</div>
+        <div class="card">Case 3</div>
+      </div>
+    </section>
+
+    <section class="section container" id="lead-intake">
+      <h2>Start Your Project</h2>
+      <form id="lead-intake">
+        <div class="form-group"><input type="text" name="name" placeholder="Name" required></div>
+        <div class="form-group"><input type="email" name="email" placeholder="Email" required></div>
+        <div class="form-group"><input type="tel" name="phone" placeholder="Phone"></div>
+        <div class="form-group"><select name="projectType" required>
+          <option value="">Project Type</option>
+          <option>Photo</option>
+          <option>Video</option>
+          <option>Mapping</option>
+        </select></div>
+        <div class="form-group"><input type="text" name="address" placeholder="Address" required></div>
+        <div class="form-group"><input type="date" name="date" required></div>
+        <div class="form-group"><textarea name="notes" placeholder="Notes"></textarea></div>
+        <div class="form-group"><label><input type="checkbox" name="remodel"> I need a Remodel Compliance package.</label></div>
+        <button class="btn" type="submit">Submit</button>
+        <div class="alert" role="status"></div>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="cta">
+        <h2>Ready to fly?</h2>
+        <a class="btn" href="#lead-intake">Get Matched</a>
+      </div>
+      <div class="grid grid-4">
+        <div>
+          <h3>Company</h3>
+          <a href="/about.html">About</a><br>
+          <a href="/contact.html">Contact</a>
+        </div>
+        <div>
+          <h3>Services</h3>
+          <a href="/services.html">All Services</a><br>
+          <a href="/remodel.html">Remodel Packages</a>
+        </div>
+        <div>
+          <h3>Resources</h3>
+          <a href="/resources.html">Guides</a><br>
+          <a href="/faq.html">FAQ</a>
+        </div>
+        <div>
+          <h3>Legal</h3>
+          <a href="/legal/privacy.html">Privacy</a><br>
+          <a href="/legal/terms.html">Terms</a>
+        </div>
+      </div>
+      <p>&copy; <span id="current-year"></span> Drone Depot</p>
+    </div>
+  </footer>
+  <script src="/js/main.js" defer></script>
+</body>
+</html>

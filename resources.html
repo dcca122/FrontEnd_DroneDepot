@@ -13,8 +13,6 @@
   <meta name="twitter:title" content="Resources — Buyer’s Guide & Case Studies">
   <meta name="twitter:description" content="Download guides and learn how to use drones for real results.">
   <meta name="twitter:image" content="/assets/og-hero.jpg">
-  <!-- GA measurement id placeholder -->
-  <script>window.DD_ANALYTICS=false;window.DD_GA_ID='G-XXXXXXXXXX';</script>
   <link rel="stylesheet" href="/css/base.css">
   <link rel="stylesheet" href="/css/components.css">
   <link rel="stylesheet" href="/css/layout.css">
@@ -48,9 +46,9 @@
     <div class="modal-content">
       <h2>Smart Buyer’s Guide</h2>
       <form id="newsletter-form">
-        <div class="form-group"><input type="email" name="email" placeholder="Email" required></div>
+        <div class="form-group"><label for="newsletter-email">Email</label><input id="newsletter-email" type="email" name="email" required></div>
         <button class="btn" type="submit">Get Guide</button>
-        <div data-feedback aria-live="polite"></div>
+        <div data-feedback role="status" aria-live="polite"></div>
       </form>
     </div>
   </div>
@@ -61,6 +59,7 @@
   </div>
 </footer>
 <div class="analytics-consent"><label><input type="checkbox" data-consent-toggle> Allow analytics</label></div>
+<script>window.DD_ANALYTICS=false;window.DD_GA_ID='G-XXXXXXXXXX';</script>
 <script>
   const link=document.getElementById('guide-link');
   const modal=document.getElementById('guide-modal');

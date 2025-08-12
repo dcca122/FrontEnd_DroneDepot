@@ -13,8 +13,6 @@
   <meta name="twitter:title" content="Municipal Partner Portal (Beta)">
   <meta name="twitter:description" content="Resident-friendly documentation path, consistent submissions, faster approvals.">
   <meta name="twitter:image" content="/assets/og-hero.jpg">
-  <!-- GA measurement id placeholder -->
-  <script>window.DD_ANALYTICS=false;window.DD_GA_ID='G-XXXXXXXXXX';</script>
   <link rel="stylesheet" href="/css/base.css">
   <link rel="stylesheet" href="/css/components.css">
   <link rel="stylesheet" href="/css/layout.css">
@@ -49,14 +47,14 @@
   </ol>
   <h2>Request Pilot Program</h2>
   <form id="municipal-form">
-    <div class="form-group"><input type="text" name="contactName" placeholder="Contact Name" required></div>
-    <div class="form-group"><input type="email" name="contactEmail" placeholder="Contact Email" required></div>
-    <div class="form-group"><input type="text" name="department" placeholder="Department" required></div>
-    <div class="form-group"><input type="text" name="jurisdiction" placeholder="Jurisdiction" required></div>
-    <div class="form-group"><input type="number" name="estMonthlyVolume" placeholder="Est. Monthly Volume"></div>
-    <div class="form-group"><textarea name="notes" placeholder="Notes"></textarea></div>
+    <div class="form-group"><label for="mun-contactName">Contact Name</label><input id="mun-contactName" type="text" name="contactName" required></div>
+    <div class="form-group"><label for="mun-contactEmail">Contact Email</label><input id="mun-contactEmail" type="email" name="contactEmail" required></div>
+    <div class="form-group"><label for="mun-department">Department</label><input id="mun-department" type="text" name="department" required></div>
+    <div class="form-group"><label for="mun-jurisdiction">Jurisdiction</label><input id="mun-jurisdiction" type="text" name="jurisdiction" required></div>
+    <div class="form-group"><label for="mun-estMonthlyVolume">Est. Monthly Volume</label><input id="mun-estMonthlyVolume" type="number" name="estMonthlyVolume"></div>
+    <div class="form-group"><label for="mun-notes">Notes</label><textarea id="mun-notes" name="notes"></textarea></div>
     <button class="btn" type="submit">Submit</button>
-    <div data-feedback aria-live="polite"></div>
+    <div data-feedback role="status" aria-live="polite"></div>
   </form>
 </main>
 <footer>
@@ -65,6 +63,7 @@
   </div>
   </footer>
   <div class="analytics-consent"><label><input type="checkbox" data-consent-toggle> Allow analytics</label></div>
+  <script>window.DD_ANALYTICS=false;window.DD_GA_ID='G-XXXXXXXXXX';</script>
   <script>window.API_BASE="__USE_SAME_ORIGIN__";</script>
 <script src="/js/main.js" defer></script>
 </body>

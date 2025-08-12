@@ -17,9 +17,9 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
-// Pause hero video when off-screen
-const heroVideo = document.querySelector('.hero video');
-if (heroVideo) {
+function pauseHeroVideoWhenOffscreen() {
+  const heroVideo = document.querySelector('.hero video');
+  if (!heroVideo) return;
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -62,6 +62,7 @@ function setFeedback(el, type, message) {
   if (message) {
     el.setAttribute('tabindex', '-1');
     el.focus();
+    el.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
 }
 
@@ -135,6 +136,7 @@ function initUploadUI(formEl, inputName, listSelector) {
       const btn = document.createElement('button');
       btn.type = 'button';
       btn.setAttribute('data-remove', '');
+      btn.setAttribute('aria-label', 'Remove file');
       btn.innerHTML = '&times;';
       btn.addEventListener('click', () => {
         files.splice(idx, 1);
@@ -273,6 +275,7 @@ function initForms() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  pauseHeroVideoWhenOffscreen();
   initForms();
   initPilotCityMode();
   const remodelForm = document.querySelector('#remodel-form');

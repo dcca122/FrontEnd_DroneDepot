@@ -74,3 +74,35 @@ footer a {
   color: red;
   display: block;
 }
+
+[data-city-badge] {
+  display: inline-block;
+  background: var(--color-secondary);
+  color: #fff;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+}
+
+[data-city-badge][hidden] {
+  display: none;
+}
+
+[data-file-list] {
+  list-style: none;
+  padding: 0;
+  margin-top: var(--spacing-sm);
+}
+
+[data-file-item] {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+[data-file-item] button {
+  background: none;
+  border: none;
+  color: red;
+  cursor: pointer;
+}

@@ -28,7 +28,7 @@
   </nav>
 </header>
 <main class="container">
-  <h1>Municipal Partner Portal <span id="city-badge"></span></h1>
+  <h1>Municipal Partner Portal <span data-city-badge class="badge" hidden></span></h1>
   <p>Fewer resubmits, standardized checklists, faster approvals, audit trail.</p>
   <h2>Flow</h2>
   <ol>
@@ -54,13 +54,6 @@
     <p>&copy; <span id="current-year"></span> Drone Depot</p>
   </div>
 </footer>
-<script>
-  const params = new URLSearchParams(window.location.search);
-  const city = params.get('city');
-  if (city) {
-    document.getElementById('city-badge').textContent = `- Official Pilot City: ${city}`;
-  }
-</script>
 <script>window.API_BASE="__USE_SAME_ORIGIN__";</script>
 <script src="/js/main.js" defer></script>
 </body>

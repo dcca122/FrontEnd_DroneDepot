@@ -79,6 +79,87 @@ function applyHoneypot(formEl) {
   formEl.append(honey, ts);
 }
 
+function applyCityCopyOverrides(cityCode) {
+  const overrides = (window.DD_CITY_COPY_OVERRIDES || {})[cityCode];
+  if (!overrides) return;
+  Object.entries(overrides).forEach(([selector, text]) => {
+    const el = document.querySelector(selector);
+    if (el) el.textContent = text;
+  });
+}
+
+function initPilotCityMode() {
+  const params = new URLSearchParams(window.location.search);
+  const city = params.get('city');
+  if (!city) return;
+  document.querySelectorAll('[data-city-badge]').forEach(el => {
+    el.textContent = `Pilot: ${city}`;
+    el.hidden = false;
+  });
+  applyCityCopyOverrides(city);
+  ['#remodel-form', '#municipal-form'].forEach(sel => {
+    const form = document.querySelector(sel);
+    if (!form) return;
+    let input = form.querySelector('input[name="city"]');
+    if (!input) {
+      input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = 'city';
+      form.appendChild(input);
+    }
+    input.value = city;
+  });
+}
+
+function initUploadUI(formEl, inputName, listSelector) {
+  if (!formEl) return;
+  const input = formEl.querySelector(`input[name="${inputName}"]`);
+  const list = formEl.querySelector(listSelector);
+  if (!input || !list) return;
+  let files = [];
+
+  function updateInput() {
+    const dt = new DataTransfer();
+    files.forEach(f => dt.items.add(f));
+    input.files = dt.files;
+  }
+
+  function render() {
+    list.innerHTML = '';
+    files.forEach((file, idx) => {
+      const li = document.createElement('li');
+      li.setAttribute('data-file-item', '');
+      const nameSpan = document.createElement('span');
+      nameSpan.setAttribute('data-name', '');
+      nameSpan.textContent = file.name;
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.setAttribute('data-remove', '');
+      btn.innerHTML = '&times;';
+      btn.addEventListener('click', () => {
+        files.splice(idx, 1);
+        updateInput();
+        render();
+      });
+      li.append(nameSpan, ' ', btn);
+      list.appendChild(li);
+    });
+  }
+
+  input.addEventListener('change', () => {
+    const selected = Array.from(input.files);
+    selected.forEach(file => {
+      if (files.length >= 10) return;
+      if (file.size > 10485760) return;
+      if (!/\.(pdf|jpe?g|png)$/i.test(file.name)) return;
+      files.push(file);
+    });
+    updateInput();
+    render();
+    input.value = '';
+  });
+}
+
 function initForms() {
   const forms = [
     {
@@ -191,7 +272,12 @@ function initForms() {
   });
 }
 
-document.addEventListener('DOMContentLoaded', initForms);
+document.addEventListener('DOMContentLoaded', () => {
+  initForms();
+  initPilotCityMode();
+  const remodelForm = document.querySelector('#remodel-form');
+  if (remodelForm) initUploadUI(remodelForm, 'permitDocs[]', '[data-file-list]');
+});
 
 // Analytics helper
 function ddTrack(eventName, payload) {

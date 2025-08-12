@@ -13,8 +13,6 @@
   <meta name="twitter:title" content="Residential Remodel Compliance — Photo/Video/Report">
   <meta name="twitter:description" content="Standardized documentation packages aligned to local submittals.">
   <meta name="twitter:image" content="/assets/og-hero.jpg">
-  <!-- GA measurement id placeholder -->
-  <script>window.DD_ANALYTICS=false;window.DD_GA_ID='G-XXXXXXXXXX';</script>
   <link rel="stylesheet" href="/css/base.css">
   <link rel="stylesheet" href="/css/components.css">
   <link rel="stylesheet" href="/css/layout.css">
@@ -72,24 +70,24 @@
   <section class="section container">
     <h2>Start Remodel Package</h2>
     <form id="remodel-form" enctype="multipart/form-data">
-      <div class="form-group"><input type="text" name="name" placeholder="Name" required></div>
-      <div class="form-group"><input type="email" name="email" placeholder="Email" required></div>
-      <div class="form-group"><input type="tel" name="phone" placeholder="Phone"></div>
-      <div class="form-group"><input type="text" name="address" placeholder="Address" required></div>
-      <div class="form-group"><input type="text" name="city" placeholder="City" required></div>
-      <div class="form-group"><input type="text" name="jurisdiction" placeholder="Jurisdiction" required></div>
-      <div class="form-group"><select name="package" required><option value="">Package</option><option>Starter</option><option>Standard</option><option>Pro</option></select></div>
-      <div class="form-group"><input type="text" name="permitNumber" placeholder="Permit #"></div>
-      <div class="form-group"><select name="hoa"><option value="">HOA?</option><option>Yes</option><option>No</option></select></div>
-      <div class="form-group"><input type="date" name="targetInspectionStart" placeholder="Inspection start"></div>
-      <div class="form-group"><input type="date" name="targetInspectionEnd" placeholder="Inspection end"></div>
-      <div class="form-group"><textarea name="notes" placeholder="Notes"></textarea></div>
-      <div class="form-group">
-        <input type="file" name="permitDocs[]" accept=".pdf,.jpg,.jpeg,.png" multiple>
+      <div class="form-group"><label for="remodel-name">Name</label><input id="remodel-name" type="text" name="name" required></div>
+      <div class="form-group"><label for="remodel-email">Email</label><input id="remodel-email" type="email" name="email" required></div>
+      <div class="form-group"><label for="remodel-phone">Phone</label><input id="remodel-phone" type="tel" name="phone"></div>
+      <div class="form-group"><label for="remodel-address">Address</label><input id="remodel-address" type="text" name="address" required></div>
+      <div class="form-group"><label for="remodel-city">City</label><input id="remodel-city" type="text" name="city" required></div>
+      <div class="form-group"><label for="remodel-jurisdiction">Jurisdiction</label><input id="remodel-jurisdiction" type="text" name="jurisdiction" required></div>
+      <div class="form-group"><label for="remodel-package">Package</label><select id="remodel-package" name="package" required><option value="">Select</option><option>Starter</option><option>Standard</option><option>Pro</option></select></div>
+      <div class="form-group"><label for="remodel-permitNumber">Permit #</label><input id="remodel-permitNumber" type="text" name="permitNumber"></div>
+      <div class="form-group"><label for="remodel-hoa">HOA?</label><select id="remodel-hoa" name="hoa"><option value="">Select</option><option>Yes</option><option>No</option></select></div>
+      <div class="form-group"><label for="remodel-targetInspectionStart">Inspection start</label><input id="remodel-targetInspectionStart" type="date" name="targetInspectionStart"></div>
+      <div class="form-group"><label for="remodel-targetInspectionEnd">Inspection end</label><input id="remodel-targetInspectionEnd" type="date" name="targetInspectionEnd"></div>
+      <div class="form-group"><label for="remodel-notes">Notes</label><textarea id="remodel-notes" name="notes"></textarea></div>
+      <div class="form-group"><label for="remodel-permitDocs">Permit documents</label>
+        <input id="remodel-permitDocs" type="file" name="permitDocs[]" accept=".pdf,.jpg,.jpeg,.png" multiple>
         <ul class="file-list" data-file-list></ul>
       </div>
       <button class="btn" type="submit">Submit</button>
-      <div data-feedback aria-live="polite"></div>
+      <div data-feedback role="status" aria-live="polite"></div>
     </form>
   </section>
 </main>
@@ -99,6 +97,7 @@
   </div>
   </footer>
   <div class="analytics-consent"><label><input type="checkbox" data-consent-toggle> Allow analytics</label></div>
+  <script>window.DD_ANALYTICS=false;window.DD_GA_ID='G-XXXXXXXXXX';</script>
   <script>window.API_BASE="__USE_SAME_ORIGIN__";</script>
   <script src="/js/main.js" defer></script>
 </body>

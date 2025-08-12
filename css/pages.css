@@ -18,6 +18,11 @@ form input, form select, form textarea {
   border: 1px solid #ccc;
   border-radius: 4px;
 }
+
+form label {
+  display: block;
+  margin-bottom: 0.25rem;
+}
 .alert {
   display: none;
   margin-top: var(--spacing-sm);

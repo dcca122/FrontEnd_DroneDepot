@@ -106,3 +106,15 @@ footer a {
   color: red;
   cursor: pointer;
 }
+
+.analytics-consent {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  background: #fff;
+  border: 1px solid #ccc;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  font-size: 0.875rem;
+}

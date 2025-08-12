@@ -277,42 +277,66 @@ document.addEventListener('DOMContentLoaded', () => {
   initPilotCityMode();
   const remodelForm = document.querySelector('#remodel-form');
   if (remodelForm) initUploadUI(remodelForm, 'permitDocs[]', '[data-file-list]');
+  initConsentAnalytics();
+  initAnalyticsEvents();
 });
+ 
+function initConsentAnalytics() {
+  const toggle = document.querySelector('[data-consent-toggle]');
+  if (!toggle) return;
+  const key = 'dd-analytics-consent';
+  const enable = () => {
+    if (window.DD_ANALYTICS) return;
+    window.DD_ANALYTICS = true;
+    if (window.DD_GA_ID) {
+      const s = document.createElement('script');
+      s.async = true;
+      s.src = `https://www.googletagmanager.com/gtag/js?id=${window.DD_GA_ID}`;
+      document.head.appendChild(s);
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function(){dataLayer.push(arguments);};
+      gtag('js', new Date());
+      gtag('config', window.DD_GA_ID);
+    }
+  };
+  if (localStorage.getItem(key) === '1') {
+    toggle.checked = true;
+    enable();
+  }
+  toggle.addEventListener('change', e => {
+    if (e.target.checked) {
+      localStorage.setItem(key, '1');
+      enable();
+    } else {
+      localStorage.removeItem(key);
+      window.DD_ANALYTICS = false;
+    }
+  });
+}
 
-// Analytics helper
 function ddTrack(eventName, payload) {
-  if (window.DD_ANALYTICS) {
-    navigator.sendBeacon('/dd-analytics', JSON.stringify({ eventName, payload }));
+  if (window.DD_ANALYTICS && typeof gtag === 'function') {
+    gtag('event', eventName, payload);
   } else {
     console.log('ddTrack', eventName, payload);
   }
 }
 
-// Cookie consent
-(function(){
-  const consentKey = 'dd-consent';
-  if (!localStorage.getItem(consentKey)) {
-    const banner = document.createElement('div');
-    banner.textContent = 'We use cookies for analytics.';
-    const btn = document.createElement('button');
-    btn.textContent = 'OK';
-    btn.onclick = () => {
-      localStorage.setItem(consentKey, '1');
-      banner.remove();
-    };
-    banner.appendChild(btn);
-    banner.style.position = 'fixed';
-    banner.style.bottom = '0';
-    banner.style.left = '0';
-    banner.style.right = '0';
-    banner.style.background = '#000';
-    banner.style.color = '#fff';
-    banner.style.padding = '1rem';
-    banner.style.display = 'flex';
-    banner.style.justifyContent = 'space-between';
-    document.body.appendChild(banner);
-  }
-})();
+function initAnalyticsEvents() {
+  const events = [
+    { name: 'lead_submit', selector: '#lead-intake-form' },
+    { name: 'remodel_submit', selector: '#remodel-form' },
+    { name: 'municipal_submit', selector: '#municipal-form' },
+    { name: 'contact_submit', selector: '#contact-form' },
+    { name: 'newsletter_submit', selector: '#newsletter-form' }
+  ];
+  events.forEach(evt => {
+    const el = document.querySelector(evt.selector);
+    if (el) {
+      el.addEventListener('submit', () => ddTrack(evt.name, {}));
+    }
+  });
+}
 
 // Update year in footers
 const yearEl = document.getElementById('current-year');

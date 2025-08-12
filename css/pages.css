@@ -33,3 +33,8 @@ form label {
 .alert.error {
   color: red;
 }
+
+/* Scroll Cinema panel offset */
+:root {
+  --panel-top: 96px;
+}

@@ -346,3 +346,52 @@ const yearEl = document.getElementById('current-year');
 if (yearEl) {
   yearEl.textContent = new Date().getFullYear();
 }
+
+function initScrollCinema(){
+  const sections = document.querySelectorAll('.scroll-cinema');
+  if(!sections.length) return;
+  // Lazy-load video sources and control play/pause based on viewport
+  const loadVideoSources = (video)=>{
+    if(video.dataset.loaded) return;
+    const srcMp4 = video.getAttribute('data-src-mp4');
+    const srcWebm = video.getAttribute('data-src-webm');
+    const sWebm = video.querySelector('source[type="video/webm"]');
+    const sMp4  = video.querySelector('source[type="video/mp4"]');
+    if(sWebm && srcWebm) sWebm.src = srcWebm;
+    if(sMp4  && srcMp4)  sMp4.src  = srcMp4;
+    video.load();
+    video.dataset.loaded = '1';
+  };
+  // Pause all but one
+  const pauseAll = (except)=>{
+    sections.forEach(sec=>{
+      const v = sec.querySelector('.cinema-video');
+      if(v && v !== except && !v.paused){ try{ v.pause(); }catch(e){} }
+    });
+  };
+  const obs = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      const sec = entry.target;
+      const video = sec.querySelector('.cinema-video');
+      if(!video) return;
+      if(entry.isIntersecting && entry.intersectionRatio > 0.5){
+        loadVideoSources(video);
+        pauseAll(video);
+        sec.classList.add('is-active');
+        // attempt autoplay; if fails, leave paused with poster
+        const playPromise = video.play();
+        if(playPromise && typeof playPromise.then === 'function'){
+          playPromise.catch(()=>{});
+        }
+      } else {
+        sec.classList.remove('is-active');
+        try{ video.pause(); }catch(e){}
+      }
+    });
+  }, { threshold: [0, 0.5, 0.75] });
+  sections.forEach(sec=>obs.observe(sec));
+}
+
+document.addEventListener('DOMContentLoaded', ()=>{
+  try{ initScrollCinema(); }catch(e){ console.warn('ScrollCinema init failed', e); }
+});

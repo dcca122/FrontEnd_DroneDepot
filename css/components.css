@@ -118,3 +118,16 @@ footer a {
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   font-size: 0.875rem;
 }
+
+:root{ --cinema-gap: clamp(16px,2.5vw,32px); --panel-width: min(420px,32vw); --panel-top: 96px; }
+.scroll-cinema{ position: relative; padding-block: clamp(48px,8vw,96px); background: var(--surface, #fff); }
+.scroll-cinema .cinema-wrap{ display: grid; grid-template-columns: 1fr var(--panel-width); gap: var(--cinema-gap); align-items: start; }
+.cinema-media{ position: relative; min-height: 65vh; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,.12); }
+.cinema-video{ width: 100%; height: 100%; object-fit: cover; display: block; }
+.cinema-panel{ position: sticky; top: var(--panel-top); align-self: start; border-radius: 12px; padding: clamp(16px,2vw,24px); background: rgba(14,18,32,.8); color: #fff; backdrop-filter: blur(6px); opacity: .0; transform: translateY(12px); transition: opacity .4s ease, transform .4s ease; }
+.scroll-cinema.is-active .cinema-panel{ opacity: 1; transform: none; }
+.cinema-title{ margin: 0 0 .5rem; line-height: 1.1; }
+.cinema-copy{ opacity: .9; margin: 0 0 1rem; }
+.cinema-ctas{ display: flex; flex-wrap: wrap; gap: 10px; }
+.cinema-ctas .btn{ padding: .75rem 1rem; }
+@media (max-width: 900px){ .scroll-cinema .cinema-wrap{ grid-template-columns: 1fr; } .cinema-panel{ position: static; margin-top: 12px; } .cinema-media{ min-height: 45vh; } }

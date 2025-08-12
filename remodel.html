@@ -30,7 +30,7 @@
 <main>
   <section class="hero" style="background:#333">
     <div class="content">
-      <h1>Remodel Documentation—Handled.</h1>
+      <h1>Remodel Documentation—Handled. <span data-city-badge class="badge" hidden></span></h1>
     </div>
   </section>
   <section class="section container">
@@ -74,7 +74,10 @@
       <div class="form-group"><input type="date" name="targetInspectionStart" placeholder="Inspection start"></div>
       <div class="form-group"><input type="date" name="targetInspectionEnd" placeholder="Inspection end"></div>
       <div class="form-group"><textarea name="notes" placeholder="Notes"></textarea></div>
-      <div class="form-group"><input type="file" name="permitDocs[]" accept=".pdf,.jpg,.jpeg,.png" multiple></div>
+      <div class="form-group">
+        <input type="file" name="permitDocs[]" accept=".pdf,.jpg,.jpeg,.png" multiple>
+        <ul class="file-list" data-file-list></ul>
+      </div>
       <button class="btn" type="submit">Submit</button>
       <div data-feedback aria-live="polite"></div>
     </form>

@@ -39,12 +39,14 @@
   </ol>
   <h2>Request Pilot Program</h2>
   <form id="municipal-form">
+    <div class="form-group"><input type="text" name="contactName" placeholder="Contact Name" required></div>
+    <div class="form-group"><input type="email" name="contactEmail" placeholder="Contact Email" required></div>
     <div class="form-group"><input type="text" name="department" placeholder="Department" required></div>
     <div class="form-group"><input type="text" name="jurisdiction" placeholder="Jurisdiction" required></div>
-    <div class="form-group"><input type="text" name="contact" placeholder="Contact" required></div>
-    <div class="form-group"><input type="number" name="volume" placeholder="Monthly volume" required></div>
+    <div class="form-group"><input type="number" name="estMonthlyVolume" placeholder="Est. Monthly Volume"></div>
+    <div class="form-group"><textarea name="notes" placeholder="Notes"></textarea></div>
     <button class="btn" type="submit">Submit</button>
-    <div class="alert" role="status"></div>
+    <div data-feedback aria-live="polite"></div>
   </form>
 </main>
 <footer>
@@ -59,6 +61,7 @@
     document.getElementById('city-badge').textContent = `- Official Pilot City: ${city}`;
   }
 </script>
+<script>window.API_BASE="__USE_SAME_ORIGIN__";</script>
 <script src="/js/main.js" defer></script>
 </body>
 </html>

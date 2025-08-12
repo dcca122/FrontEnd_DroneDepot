@@ -61,3 +61,16 @@ footer {
 footer a {
   color: #fff;
 }
+
+[data-feedback] {
+  display: none;
+  margin-top: var(--spacing-sm);
+}
+[data-feedback].success {
+  color: green;
+  display: block;
+}
+[data-feedback].error {
+  color: red;
+  display: block;
+}

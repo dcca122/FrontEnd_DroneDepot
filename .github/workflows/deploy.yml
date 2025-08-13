@@ -32,12 +32,12 @@ jobs:
       - name: Prepare SSH
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.DEPLOY_KEY }}" > ~/.ssh/id_rsa
+          echo "${{ secrets.HOSTINGER2 }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -p "${{ secrets.DEPLOY_PORT }}" "${{ secrets.DEPLOY_HOST }}" >> ~/.ssh/known_hosts
+          ssh-keyscan -p 22 "${{ secrets.HOSTINGER2 }}" >> ~/.ssh/known_hosts
 
       - name: Rsync to server
         run: |
           SRC="."
           if [ -d "dist" ]; then SRC="dist"; fi
-          rsync -az --delete -e "ssh -p ${{ secrets.DEPLOY_PORT }} -i ~/.ssh/id_rsa" "$SRC/" "${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}:${{ secrets.DEPLOY_PATH }}/"
+          rsync -az --delete -e "ssh -p 22 -i ~/.ssh/id_rsa" "$SRC/" "root@${{ secrets.HOSTINGER2 }}:${{ secrets.DEPLOY_PATH }}/"

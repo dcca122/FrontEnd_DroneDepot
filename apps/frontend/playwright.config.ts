@@ -1,19 +1,12 @@
 import { defineConfig, devices } from "@playwright/test";
 
+const baseURL = process.env.PLAYWRIGHT_BASE_URL || "http://localhost:3000";
+
 export default defineConfig({
   testDir: "./tests",
-  webServer: {
-    command: "npm run dev",
-    port: 3000,
-    reuseExistingServer: !process.env.CI,
-    env: {
-      NEXT_PUBLIC_API_BASE_URL: "http://localhost:3000",
-      NEXT_PUBLIC_DRONEREGION_URL: "https://example.com",
-      NEXT_PUBLIC_SITE_URL: "http://localhost:3000",
-    },
-  },
+  timeout: 120 * 1000,
   use: {
-    baseURL: "http://localhost:3000",
+    baseURL,
     trace: "on-first-retry",
   },
   projects: [
@@ -21,5 +14,13 @@ export default defineConfig({
       name: "chromium",
       use: { ...devices["Desktop Chrome"] },
     },
+    ...(process.env.PW_USE_SYSTEM_EDGE
+      ? [
+          {
+            name: "edge",
+            use: { ...devices["Desktop Edge"], channel: "msedge" },
+          },
+        ]
+      : []),
   ],
 });

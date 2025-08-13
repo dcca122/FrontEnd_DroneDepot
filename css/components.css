@@ -131,3 +131,7 @@ footer a {
 .cinema-ctas{ display: flex; flex-wrap: wrap; gap: 10px; }
 .cinema-ctas .btn{ padding: .75rem 1rem; }
 @media (max-width: 900px){ .scroll-cinema .cinema-wrap{ grid-template-columns: 1fr; } .cinema-panel{ position: static; margin-top: 12px; } .cinema-media{ min-height: 45vh; } }
+
+.btn { transition: opacity .2s ease; }
+.btn:hover,
+.btn:focus { opacity: 0.85; }

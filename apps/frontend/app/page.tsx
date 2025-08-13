@@ -1,29 +1,5 @@
-import ScrollCinema from "@/components/ScrollCinema";
+import ScrollCinemaList from "@/components/ScrollCinemaList";
 import JsonLd from "@/components/JsonLd";
-
-const sections = [
-  {
-    video: "/video/hero.mp4",
-    poster: "/video/hero-poster.jpg", // TODO: replace with inspections poster
-    headline: "Inspections",
-    bullets: ["FAA pilots", "Detailed reporting"],
-    cta: { label: "Learn More", href: "/services/inspections" },
-  },
-  {
-    video: "/video/hero.mp4",
-    poster: "/video/hero-poster.jpg", // TODO: replace with mapping poster
-    headline: "Mapping",
-    bullets: ["2D/3D outputs", "Fast turnaround"],
-    cta: { label: "Explore Mapping", href: "/services/mapping" },
-  },
-  {
-    video: "/video/hero.mp4",
-    poster: "/video/hero-poster.jpg", // TODO: replace with FPV poster
-    headline: "FPV",
-    bullets: ["Dynamic footage", "Pro pilots"],
-    cta: { label: "See FPV", href: "/services/fpv" },
-  },
-];
 
 export default function Home() {
   const org = {
@@ -46,9 +22,7 @@ export default function Home() {
     <main>
       <JsonLd json={org} />
       <JsonLd json={web} />
-      {sections.map((s, i) => (
-        <ScrollCinema key={i} {...s} />
-      ))}
+      <ScrollCinemaList />
     </main>
   );
 }

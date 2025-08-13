@@ -17,21 +17,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
-function pauseHeroVideoWhenOffscreen() {
-  const heroVideo = document.querySelector('.hero video');
-  if (!heroVideo) return;
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        heroVideo.play().catch(() => {});
-      } else {
-        heroVideo.pause();
-      }
-    });
-  });
-  observer.observe(heroVideo);
-}
-
 // API helpers and form wiring
 const API_BASE = (window.API_BASE && window.API_BASE !== "__USE_SAME_ORIGIN__") ? window.API_BASE : "";
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -275,7 +260,6 @@ function initForms() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  pauseHeroVideoWhenOffscreen();
   initForms();
   initPilotCityMode();
   const remodelForm = document.querySelector('#remodel-form');
@@ -374,19 +358,14 @@ function initScrollCinema(){
       const sec = entry.target;
       const video = sec.querySelector('.cinema-video');
       if(!video) return;
-      if(entry.isIntersecting && entry.intersectionRatio > 0.5){
-        loadVideoSources(video);
-        pauseAll(video);
-        sec.classList.add('is-active');
-        // attempt autoplay; if fails, leave paused with poster
-        const playPromise = video.play();
-        if(playPromise && typeof playPromise.then === 'function'){
-          playPromise.catch(()=>{});
+        if(entry.isIntersecting && entry.intersectionRatio > 0.5){
+          loadVideoSources(video);
+          pauseAll(video);
+          sec.classList.add('is-active');
+        } else {
+          sec.classList.remove('is-active');
+          try{ video.pause(); }catch(e){}
         }
-      } else {
-        sec.classList.remove('is-active');
-        try{ video.pause(); }catch(e){}
-      }
     });
   }, { threshold: [0, 0.5, 0.75] });
   sections.forEach(sec=>obs.observe(sec));

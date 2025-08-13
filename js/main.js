@@ -358,19 +358,36 @@ function initScrollCinema(){
       const sec = entry.target;
       const video = sec.querySelector('.cinema-video');
       if(!video) return;
-        if(entry.isIntersecting && entry.intersectionRatio > 0.5){
-          loadVideoSources(video);
-          pauseAll(video);
-          sec.classList.add('is-active');
-        } else {
-          sec.classList.remove('is-active');
-          try{ video.pause(); }catch(e){}
-        }
+      if(entry.isIntersecting && entry.intersectionRatio > 0.5){
+        loadVideoSources(video);
+        pauseAll(video);
+        sec.classList.add('is-active');
+        try{ video.play(); }catch(e){}
+      } else {
+        sec.classList.remove('is-active');
+        try{ video.pause(); }catch(e){}
+      }
     });
   }, { threshold: [0, 0.5, 0.75] });
   sections.forEach(sec=>obs.observe(sec));
 }
 
+function initHeroVideo(){
+  const video = document.getElementById('hero-video');
+  if(!video) return;
+  const obs = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        try{ video.play(); }catch(e){}
+      } else {
+        try{ video.pause(); }catch(e){}
+      }
+    });
+  },{threshold:0.5});
+  obs.observe(video);
+}
+
 document.addEventListener('DOMContentLoaded', ()=>{
+  try{ initHeroVideo(); }catch(e){ console.warn('HeroVideo init failed', e); }
   try{ initScrollCinema(); }catch(e){ console.warn('ScrollCinema init failed', e); }
 });

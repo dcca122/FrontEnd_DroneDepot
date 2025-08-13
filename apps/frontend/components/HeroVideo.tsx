@@ -23,7 +23,7 @@ export default function HeroVideo({ src, poster, overlayClassName, children }: H
           muted
           playsInline
           autoPlay
-          preload="auto"
+          preload="metadata"
           onError={() => setError(true)}
         />
       ) : (

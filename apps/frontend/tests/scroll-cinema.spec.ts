@@ -1,29 +1,29 @@
 import { test, expect } from "@playwright/test";
 
-test("lazy-loads videos on intersection", async ({ page }) => {
+test("CTA panel remains sticky while scrolling", async ({ page }) => {
   await page.goto("/");
-  const wrappers = page.locator("[data-testid='video-wrapper']");
-  await expect(wrappers.nth(1).locator("source")).toHaveCount(0);
-  await wrappers.nth(1).scrollIntoViewIfNeeded();
-  await expect(wrappers.nth(1).locator("source")).toHaveCount(1);
-});
-
-test("shows poster and no autoplay when reduced motion", async ({ page }) => {
-  await page.emulateMedia({ reducedMotion: "reduce" });
-  await page.goto("/");
-  const first = page.locator("[data-testid='video-wrapper']").first();
-  await expect(first.getByRole("button", { name: "Tap to play" })).toBeVisible();
-});
-
-test("mobile layout stacks video and CTA", async ({ page }) => {
-  await page.setViewportSize({ width: 375, height: 812 });
-  await page.goto("/");
-  const section = page.locator("section").first();
-  const videoBox = await section.locator("[data-testid='video-wrapper']").boundingBox();
-  const ctaBox = await section.locator("[data-testid='cta-panel']").boundingBox();
-  if (videoBox && ctaBox) {
-    expect(ctaBox.y).toBeGreaterThanOrEqual(videoBox.y + videoBox.height);
+  const cta = page.locator("[data-testid='cta-panel']").first();
+  await cta.waitFor();
+  const startBox = await cta.boundingBox();
+  await page.evaluate(() => window.scrollBy(0, 800));
+  const endBox = await cta.boundingBox();
+  if (startBox && endBox) {
+    expect(Math.abs(startBox.y - endBox.y)).toBeLessThanOrEqual(5);
   } else {
     throw new Error("bounding boxes not found");
   }
+});
+
+test("CTA panel fades after scroll", async ({ page }) => {
+  await page.goto("/");
+  const cta = page.locator("[data-testid='cta-panel']").first();
+  const initialOpacity = await cta.evaluate((el) =>
+    parseFloat(getComputedStyle(el).opacity)
+  );
+  await page.evaluate(() => window.scrollBy(0, 1000));
+  const scrolledOpacity = await cta.evaluate((el) =>
+    parseFloat(getComputedStyle(el).opacity)
+  );
+  expect(scrolledOpacity).toBeLessThan(initialOpacity);
+  expect(scrolledOpacity).toBeLessThanOrEqual(0.1);
 });

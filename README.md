@@ -1,49 +1,40 @@
-# Drone Depot Static Front-End
+# Drone Depot Frontend
 
-This repository contains the static HTML/CSS/JS front-end for Drone Depot. It is designed to be deployed on Hostinger or any static file host.
+This repository contains the Next.js front end for Drone Depot.
 
-## Structure
-```
-/ (root)
-  index.html
-  services.html
-  remodel.html
-  municipal.html
-  about.html
-  faq.html
-  resources.html
-  contact.html
-  /legal/privacy.html
-  /legal/terms.html
-  /css/base.css
-  /css/components.css
-  /css/layout.css
-  /css/pages.css
-  /js/main.js
-  /assets/
-  /favicons/
-  robots.txt
-  sitemap.xml
-```
+## Requirements
+- Node.js 18+
+
+## Setup
+1. Install dependencies:
+   ```bash
+   cd apps/frontend
+   npm install
+   ```
+2. Create a `.env` file based on `.env.example` and set values for:
+   - `NEXT_PUBLIC_API_BASE_URL`
+   - `NEXT_PUBLIC_GA_ID`
+   - `NEXT_PUBLIC_SITE_URL`
+   - `NEXT_PUBLIC_DRONEREGION_URL` (optional)
 
 ## Development
-No build tools are required. Edit the HTML/CSS/JS files directly.
+Run the dev server:
+```bash
+npm run dev
+```
 
-## Deployment to Hostinger
-1. Zip the project files or use git/SSH.
-2. Upload to your Hostinger account under `public_html`.
-3. Ensure `index.html` is at the root. Other pages sit alongside it.
+## Build
+```bash
+npm run build
+npm start
+```
 
-## Replacing Media
-- Replace `assets/hero.mp4` and `assets/hero.webm` with your hero video files.
-- Replace `assets/hero-poster.jpg` with a lightweight poster image.
-- Place gallery images and other assets in the `assets/` folder.
-
-## Wiring Real APIs
-Forms currently POST to `/api/*` endpoints. Update these URLs to point to your production API when ready.
-
-## Analytics Toggle
-Set `window.DD_ANALYTICS = true` before loading `js/main.js` to enable analytics beacon calls. Otherwise events log to console.
+## Tests
+Playwright end‑to‑end tests are in `apps/frontend/tests`.
+Run them with:
+```bash
+npx playwright test
+```
 
 ## License
 MIT

@@ -6,9 +6,7 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "test": "playwright test",
-    "test:edge": "cross-env PW_USE_SYSTEM_EDGE=1 playwright test -g \"@smoke\" --project=edge"
+    "lint": "next lint"
   },
   "dependencies": {
     "framer-motion": "^12.23.12",
@@ -25,8 +23,6 @@
     "eslint": "^9",
     "eslint-config-next": "15.4.6",
     "tailwindcss": "^4",
-    "typescript": "^5",
-    "@playwright/test": "^1.42.0",
-    "cross-env": "^7.0.3"
+    "typescript": "^5"
   }
 }

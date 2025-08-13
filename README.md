@@ -29,12 +29,5 @@ npm run build
 npm start
 ```
 
-## Tests
-Playwright end‑to‑end tests are in `apps/frontend/tests`.
-Run them with:
-```bash
-npx playwright test
-```
-
 ## License
 MIT

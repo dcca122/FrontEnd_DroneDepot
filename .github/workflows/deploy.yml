@@ -25,11 +25,11 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'npm'
+          cache: npm
 
       - name: Install deps (only if package.json exists)
         if: hashFiles('**/package.json') != ''
-        run: npm ci
+        run: npm install
 
       - name: Build (no-op if there is no build script)
         if: hashFiles('**/package.json') != ''

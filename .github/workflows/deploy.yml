@@ -1,0 +1,63 @@
+name: Deploy Frontend
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+env:
+  DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+  DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+  DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
+  SSH_PORT: ${{ secrets.SSH_PORT }}
+  SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_KEY }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node (only if package.json exists)
+        if: hashFiles('**/package.json') != ''
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install deps (only if package.json exists)
+        if: hashFiles('**/package.json') != ''
+        run: npm ci
+
+      - name: Build (no-op if there is no build script)
+        if: hashFiles('**/package.json') != ''
+        run: npm run build --if-present
+
+      - name: Decide publish directory
+        id: pickdir
+        run: |
+          if [ -d "dist" ]; then echo "dir=dist" >> $GITHUB_OUTPUT
+          elif [ -d "build" ]; then echo "dir=build" >> $GITHUB_OUTPUT
+          else echo "dir=." >> $GITHUB_OUTPUT; fi
+
+      - name: Export publish dir
+        run: echo "PUBLISH_DIR=${{ steps.pickdir.outputs.dir }}" >> $GITHUB_ENV
+
+      - name: Prepare SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -p ${SSH_PORT:-22} $DEPLOY_HOST >> ~/.ssh/known_hosts
+
+      - name: Rsync to server
+        run: |
+          rsync -az --delete \
+            --exclude ".git*" --exclude ".github" \
+            -e "ssh -p ${SSH_PORT:-22} -i ~/.ssh/id_ed25519" \
+            "$PUBLISH_DIR"/ "$DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH/"
+
+      - name: Done
+        run: echo "Deployed $PUBLISH_DIR -> $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH"

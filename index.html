@@ -48,9 +48,9 @@
   <main>
     <section class="hero">
       <!-- Hero video should be compressed under 15MB for faster loads -->
-      <video autoplay muted loop playsinline preload="metadata" poster="/assets/hero-poster.jpg" id="hero-video">
-        <source src="/assets/hero.mp4" type="video/mp4">
+      <video autoplay muted playsinline loop preload="metadata" poster="/assets/hero-poster.jpg" id="hero-video">
         <source src="/assets/hero.webm" type="video/webm">
+        <source src="/assets/hero.mp4" type="video/mp4">
         <p>Your browser does not support the video. <a href="/assets/hero.mp4">Download the video</a>.</p>
       </video>
       <div class="content">
@@ -82,9 +82,9 @@
     <section class="scroll-cinema" id="cinema-1" aria-label="Aerial promo scene 1">
       <div class="cinema-wrap container">
         <div class="cinema-media">
-          <video class="cinema-video" muted playsinline loop preload="metadata" poster="/assets/scene1-poster.jpg" data-src-mp4="/assets/scene1.mp4" data-src-webm="/assets/scene1.webm" aria-label="Aerial footage of construction site">
-            <source type="video/webm">
-            <source type="video/mp4">
+          <video class="cinema-video" muted playsinline loop preload="metadata" poster="/assets/scene1-poster.jpg" aria-label="Aerial footage of construction site">
+            <source data-src="/assets/scene1.webm" type="video/webm">
+            <source data-src="/assets/scene1.mp4" type="video/mp4">
           </video>
         </div>
         <aside class="cinema-panel" role="complementary" aria-labelledby="cinema-1-title">
@@ -101,9 +101,9 @@
     <section class="scroll-cinema" id="cinema-2" aria-label="Aerial promo scene 2">
       <div class="cinema-wrap container">
         <div class="cinema-media">
-          <video class="cinema-video" muted playsinline loop preload="metadata" poster="/assets/scene2-poster.jpg" data-src-mp4="/assets/scene2.mp4" data-src-webm="/assets/scene2.webm" aria-label="Residential remodel documentation">
-            <source type="video/webm">
-            <source type="video/mp4">
+          <video class="cinema-video" muted playsinline loop preload="metadata" poster="/assets/scene2-poster.jpg" aria-label="Residential remodel documentation">
+            <source data-src="/assets/scene2.webm" type="video/webm">
+            <source data-src="/assets/scene2.mp4" type="video/mp4">
           </video>
         </div>
         <aside class="cinema-panel" role="complementary" aria-labelledby="cinema-2-title">
@@ -120,9 +120,9 @@
     <section class="scroll-cinema" id="cinema-3" aria-label="Aerial promo scene 3">
       <div class="cinema-wrap container">
         <div class="cinema-media">
-          <video class="cinema-video" muted playsinline loop preload="metadata" poster="/assets/scene3-poster.jpg" data-src-mp4="/assets/scene3.mp4" data-src-webm="/assets/scene3.webm" aria-label="Municipal partner portal">
-            <source type="video/webm">
-            <source type="video/mp4">
+          <video class="cinema-video" muted playsinline loop preload="metadata" poster="/assets/scene3-poster.jpg" aria-label="Municipal partner portal">
+            <source data-src="/assets/scene3.webm" type="video/webm">
+            <source data-src="/assets/scene3.mp4" type="video/mp4">
           </video>
         </div>
         <aside class="cinema-panel" role="complementary" aria-labelledby="cinema-3-title">
@@ -217,6 +217,7 @@
   <div class="analytics-consent"><label><input type="checkbox" data-consent-toggle> Allow analytics</label></div>
   <script>window.DD_ANALYTICS=false;window.DD_GA_ID='G-XXXXXXXXXX';</script>
   <script>window.API_BASE="__USE_SAME_ORIGIN__";</script>
+  <script src="/js/scroll-cinema.js" defer></script>
   <script src="/js/main.js" defer></script>
 </body>
 </html>
